@@ -14,9 +14,9 @@ makedirs() {
     local paths=("../data/"
 		 "../data/dataframes"
                  "../data/models")
-    for path in "${paths[@]}"; do
-        if [ ! -d "$path" ]; then
-            mkdir -p "$path"
+    for dir in "${paths[@]}"; do
+        if [ ! -d "$dir" ]; then
+            mkdir -p "$dir"
         fi
     done
 }
