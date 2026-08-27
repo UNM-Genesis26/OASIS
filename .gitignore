@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+.ipynb_checkpoints/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Downloaded data and model weights
+data/
+*.pkl
+*.pt
+*?ref_type=heads*
+
+# Editors / OS
+.DS_Store
+.vscode/
+.idea/
