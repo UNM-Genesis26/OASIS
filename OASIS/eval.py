@@ -17,7 +17,7 @@ def evaluate(cfg: OASISConfig, model_path: str = None, species: str = "NR"):
 
     model = UNetSmall(base=cfg.base_channels).to(device)
     state = torch.load(model_path, map_location=device)
-    model.load_state_dict(state, strict=False)
+    model.load_state_dict(state)
     model.eval()
 
     lossf = SegRegLoss(
