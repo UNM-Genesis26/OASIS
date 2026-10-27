@@ -9,9 +9,9 @@ class OASISConfig:
     Parameters set here are passed into train() and evaluate()
     """
     # Data
-    data_root: str = "../data/tensors" # path containing {train,val,test}/{hybrid,NR}/*.pt
+    data_root: str = "../data/tensors" # path containing {train,test}/{hybrid,NR}/*.pt; validation is held out from train/
     kinds: Sequence[str] = ("hybrid", "NR") # species subfolders for data_root
-    split: str = "train" # used by dataset helpers
+    split: str = "train" # not read by train() or evaluate(); train() always uses train/, evaluate() uses eval_split
     hw: Tuple[int,int] = (288, 512) # (H,W) image dimensions
     file_pattern: str = "*.pt"
     dataframe_root: str = "../data/dataframes"

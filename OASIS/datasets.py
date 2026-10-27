@@ -13,7 +13,7 @@ class OASISDataset(Dataset):
     """
     Directory layout:
       tensors/
-        train | val | test/
+        train | test/          (any split name works; train() holds out validation from train/)
           hybrid/
             0.pt, 1.pt, ...
           NR/
