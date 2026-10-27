@@ -87,13 +87,13 @@ def generate_from_df(
             #Try to make ER image
             NRim = tmp['NRim']
             ERim = make_im(tmp["ER_col"], tmp["ER_row"], tmp["ER_intensity"], bins=(W,H), ranges=((0,W),(0,H)))
-            valid = torch.zeros([288,512]).float()
+            valid = torch.zeros([H,W]).float()
             valid[tmp['row'].min():tmp['row'].max()+1,tmp['col'].min():tmp['col'].max()+1]=1
-        except:
+        except KeyError:
             #if ER columns don't exist then the data is NR-only
             NRim = tmp['im']
             ERim = np.zeros([H,W])
-            valid = torch.zeros([288,512]).float()
+            valid = torch.zeros([H,W]).float()
             valid[tmp['rowmin']:tmp['rowmax']+1,tmp['colmin']:tmp['colmax']+1]=1
         NRim[NRim <= 1] = 0 #signal to noise cut
         ERim[ERim <= 1] = 0
