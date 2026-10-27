@@ -30,7 +30,7 @@ def train(cfg: OASISConfig):
         w_ch=(cfg.w_ER, cfg.w_NR), w_regions=(cfg.W_ER, cfg.W_NR, cfg.W_overlap)
     ).to(device)
     opt    = torch.optim.AdamW(model.parameters(), lr=cfg.lr, weight_decay=1e-4)
-    scaler = torch.cuda.amp.GradScaler(enabled=(device.type == 'cuda'))
+    scaler = torch.amp.GradScaler(device.type, enabled=(device.type == 'cuda'))
 
     os.makedirs(cfg.model_dir, exist_ok=True)
     best_val = float('inf'); best_epoch = 0; no_improve = 0
@@ -48,7 +48,7 @@ def train(cfg: OASISConfig):
             valid = valid.to(device, non_blocking=True).float()
 
             opt.zero_grad(set_to_none=True)
-            with torch.cuda.amp.autocast(enabled=(device.type=='cuda')):
+            with torch.amp.autocast(device.type, enabled=(device.type=='cuda')):
                 I_hat = model(I_in)
                 d = lossf(I_hat, I_in, t=t, valid=valid)
                 loss = d["loss"]
