@@ -26,7 +26,7 @@ def train(cfg: OASISConfig):
 
     model = UNetSmall(base=cfg.base_channels).to(device)
     lossf = SegRegLoss(
-        alpha_reg=cfg.alpha_reg, alpha_tv=cfg.lam_tv,
+        alpha_reg=cfg.alpha_reg, alpha_tv=cfg.alpha_tv,
         w_ch=(cfg.w_ER, cfg.w_NR), w_regions=(cfg.W_ER, cfg.W_NR, cfg.W_overlap)
     ).to(device)
     opt    = torch.optim.AdamW(model.parameters(), lr=cfg.lr, weight_decay=1e-4)
