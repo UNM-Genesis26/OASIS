@@ -1,7 +1,6 @@
 
 from dataclasses import dataclass, field
 from typing import Sequence, Tuple, Optional
-import os
 
 @dataclass
 class OASISConfig:
@@ -43,6 +42,6 @@ class OASISConfig:
     alpha_tv: float = 0.01
     
     # Evaluation
-    model_file: str = os.path.join(model_dir,"nominal_weights.pt") #name of weights file you want to use for evaluation
+    model_file: str = "nominal_weights.pt" #weights file to use for evaluation; a bare name is looked up in model_dir
     eval_split: str = "test"
     eval_batch_size: int = 16

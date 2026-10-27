@@ -10,7 +10,8 @@ from .utils import ensure_bchw, invert_scale_log10p_torch
 @torch.no_grad()
 def evaluate(cfg: OASISConfig, model_path: str = None, species: str = "NR"):
     device = torch.device(cfg.device if torch.cuda.is_available() and cfg.device=="cuda" else "cpu")
-    model_path = model_path or (os.path.join(cfg.model_dir, cfg.model_file) if cfg.model_file is None else cfg.model_file)
+    model_path = model_path or (cfg.model_file if os.path.dirname(cfg.model_file)
+                                else os.path.join(cfg.model_dir, cfg.model_file))
 
     ds = OASISDataset(root_dir=cfg.data_root, split=cfg.eval_split, kinds=(species,), hw=cfg.hw, file_pattern=cfg.file_pattern)
     dl = DataLoader(ds, batch_size=cfg.eval_batch_size, shuffle=False, num_workers=1, pin_memory=True)
