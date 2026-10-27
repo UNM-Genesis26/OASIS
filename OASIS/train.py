@@ -54,6 +54,7 @@ def train(cfg: OASISConfig):
                 loss = d["loss"]
 
             scaler.scale(loss).backward()
+            scaler.unscale_(opt)  # clip true grads, not AMP-scaled ones
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             scaler.step(opt); scaler.update()
 
