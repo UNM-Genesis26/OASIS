@@ -25,8 +25,13 @@ data/
 .vscode/
 .idea/
 
-# study area
-study/
+# notes
+notes/
 
 # scratch space
 scratch/
+
+# Claude Code
+CLAUDE.md
+CLAUDE.local.md
+.claude/
